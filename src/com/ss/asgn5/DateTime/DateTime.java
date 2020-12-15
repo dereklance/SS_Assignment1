@@ -11,6 +11,7 @@ import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjuster;
 import java.time.temporal.TemporalAdjusters;
 
 /**
@@ -46,8 +47,7 @@ public class DateTime {
 	// 6. Write an example that, for the given month of the current year, lists all of the Mondays in that month.
 	void reportAllMondays(YearMonth month) {
 		System.out.println("Mondays:");
-		
-		LocalDate firstMonday = month.atDay(1).with(TemporalAdjusters.next(DayOfWeek.MONDAY));
+		LocalDate firstMonday = month.atDay(1).with(TemporalAdjusters.firstInMonth(DayOfWeek.MONDAY));
 		for (LocalDate day = firstMonday; !day.isAfter(month.atEndOfMonth()); day = day.plusWeeks(1)) {
 			System.out.println(day.format(DateTimeFormatter.ofPattern("MMMM dd")));
 		}
